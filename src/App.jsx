@@ -1,6 +1,5 @@
 
 import { Routes , Route} from 'react-router-dom'
-import './App.css'
 import Counter from './pages/Counter'
 import Forms from './pages/forms'
 import Home from './pages/Home'
