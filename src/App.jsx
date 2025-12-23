@@ -1,8 +1,8 @@
+import { Routes, Route } from 'react-router-dom'
+import Counter from './pages/Counter.jsx'
+import Forms from './pages/Forms.jsx'
+import Home from './pages/Home.jsx'
 
-import { Routes , Route} from 'react-router-dom'
-import Counter from './pages/Counter'
-import Forms from './pages/Forms'
-import Home from './pages/Home'
 
 function App() {
   return (
