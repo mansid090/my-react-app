@@ -4,6 +4,7 @@ export default function Counter() {
   const { count, increment, decrement, reset } = useCounter(0);
 
   return (
+    
     <main className="min-h-screen min-w-screen bg-white flex flex-col justify-center items-center">
       <div className="font-bold text-5xl gap-4">
         <h1>Counter App</h1>
