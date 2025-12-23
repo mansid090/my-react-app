@@ -1,7 +1,7 @@
 
 import { Routes , Route} from 'react-router-dom'
 import Counter from './pages/Counter'
-import Forms from './pages/forms'
+import Forms from './pages/Forms'
 import Home from './pages/Home'
 
 function App() {
