@@ -1,11 +1,16 @@
 import Button from "../Components/Button";
 import { useCounter } from "../hooks/useCounter";
+import { Link } from "react-router-dom";
 export default function Counter() {
   const { count, increment, decrement, reset } = useCounter(0);
 
   return (
     <main className="min-h-screen min-w-screen bg-white flex flex-col justify-center items-center">
-    
+      <Link to="/" className="absolute top-6 left-6">
+        <Button className="px-3 py-1 text-sm rounded-md border border-stone-300 text-stone-700 hover:bg-stone-100 transition">
+          ← Home
+        </Button>
+      </Link>
       <div className="font-bold text-5xl gap-4">
         <h1>Counter App</h1>
       </div>
