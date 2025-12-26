@@ -1,8 +1,12 @@
 import { useFormik } from "formik";
 import Button from "../Components/Button";
 import Input from "../Components/Input";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
+import DarkModeToggle from "../Components/DarkModeToggle";
+import { useState } from "react";
 export default function FormPage() {
+  const [showPassword, setShowPassword] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -54,83 +58,61 @@ export default function FormPage() {
   });
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-50">
+    <main className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-white flex items-center justify-center transition-colors">
+      <DarkModeToggle />
       <Link to="/" className="absolute top-6 left-6">
-        <Button className="px-3 py-1 text-sm rounded-md border border-stone-300 text-stone-700 hover:bg-stone-100 transition">
+        <Button className="px-3 py-1 text-sm rounded-md border border-stone-300 text-stone-700 hover:bg-stone-100 transition dark:text-white">
           ← Home
         </Button>
       </Link>
 
       <form
         onSubmit={formik.handleSubmit}
-        className="bg-white p-6 rounded-lg shadow w-full max-w-md space-y-4"
+        className="
+                bg-white dark:bg-gray-800
+                p-6 rounded-lg shadow
+                w-full max-w-md space-y-4
+                transition-colors
+              "
       >
-        <h1 className="text-2xl font-bold text-center">Contact Form</h1>
+        <h1 className="text-2xl font-bold text-center text-black-900 dark:text-white">
+          Contact Form
+        </h1>
 
-      
-        <Input
-          label="Name"
-          id="name"
-          name="name"
-          value={formik.values.name}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
+        <Input label="Name" {...formik.getFieldProps("name")} />
         {formik.touched.name && formik.errors.name && (
           <p className="text-red-500 text-sm">{formik.errors.name}</p>
         )}
 
-        
-        <Input
-          label="Email"
-          id="email"
-          name="email"
-          type="email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
+        <Input label="Email" type="email" {...formik.getFieldProps("email")} />
         {formik.touched.email && formik.errors.email && (
-          <p className="text-red-500 text-sm">{formik.errors.email}</p>
+          <p className="text-red-500 text-sm ">{formik.errors.email}</p>
         )}
 
-        
-        <Input
-          label="Mobile"
-          id="mobile"
-          name="mobile"
-          type="tel"
-          value={formik.values.mobile}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-        />
+        <Input label="Mobile" type="tel" {...formik.getFieldProps("mobile")} />
         {formik.touched.mobile && formik.errors.mobile && (
           <p className="text-red-500 text-sm">{formik.errors.mobile}</p>
         )}
 
-        
         <Input
           label="Password"
-          id="password"
-          name="password"
-          type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          type={showPassword ? "text" : "password"}
+          showToggle
+          isPasswordVisible={showPassword}
+          onToggle={() => setShowPassword((prev) => !prev)}
+          {...formik.getFieldProps("password")}
         />
+
         {formik.touched.password && formik.errors.password && (
-          <p className="text-red-500 text-sm">{formik.errors.password}</p>
+          <p className="text-red-500 dark:text-red-400 text-sm">
+            {formik.errors.password}
+          </p>
         )}
 
-        
         <Input
           label="Confirm Password"
-          id="confirmPassword"
-          name="confirmPassword"
           type="password"
-          value={formik.values.confirmPassword}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          {...formik.getFieldProps("confirmPassword")}
         />
         {formik.touched.confirmPassword && formik.errors.confirmPassword && (
           <p className="text-red-500 text-sm">
@@ -138,24 +120,24 @@ export default function FormPage() {
           </p>
         )}
 
-        
         <div className="flex flex-col gap-1">
-          <label htmlFor="message" className="text-sm text-stone-700">
+          <label
+            htmlFor="message"
+            className="text-sm dark:text-white text-stone-700"
+          >
             Message
           </label>
           <textarea
             id="message"
-            name="message"
             rows="3"
-            value={formik.values.message}
-            onChange={formik.handleChange}
-            className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-black"
+            className="border rounded-md min-h-[100px] max-h-[160px] p-2 focus:outline-none dark:text-white dark:bg-gray-700  focus:ring-2 focus:ring-black"
+            {...formik.getFieldProps("message")}
           />
         </div>
 
         <Button
           type="submit"
-          className="w-full bg-black text-white py-2 rounded"
+          className="w-full bg-black text-white py-2 rounded  "
         >
           Submit
         </Button>
