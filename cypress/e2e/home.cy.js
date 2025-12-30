@@ -32,3 +32,12 @@ describe("Home Page", () => {
 });
 
 
+describe("Home Page" , () => {
+   beforeEach(() => {
+    cy.visit("")
+   });
+
+   it("renders home page" , () => {
+      
+   })
+})
